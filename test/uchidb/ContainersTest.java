@@ -54,7 +54,12 @@ public class ContainersTest {
 			intClassArray[i] = intArray[i];
 		}
 		
+		Map<String, Integer> myMap = cont.initEmptyMap();
 		
+		cont.storeMap(myMap);
+		for (int i =0; i < intArray.length; i++){
+			cont.addToMap(strArray[i], intClassArray[i], true);
+		}
 	}
 
 	@Test
@@ -76,12 +81,6 @@ public class ContainersTest {
 
 	@Test 
 	public void testMapFunctionality(){
-		Map<String, Integer> myMap = cont.initEmptyMap();
-		
-		cont.storeMap(myMap);
-		for (int i =0; i < intArray.length; i++){
-			cont.addToMap(strArray[i], intClassArray[i], true);
-		}
 		boolean expFalse = cont.addToMap("Uwe", 1000, false);
 		boolean expTrue = cont.addToMap("Richard", new Integer(42), true);
 		
