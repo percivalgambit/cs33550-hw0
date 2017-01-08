@@ -1,6 +1,5 @@
 package uchidb;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import java.util.Set;
  * @author aelmore
  */
 public class HW0Runner {
-
 	private static class SingletonContainersImpl implements Containers<Integer, String> {
 		private static SingletonContainersImpl instance = null;
 
