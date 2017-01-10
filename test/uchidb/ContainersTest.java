@@ -99,9 +99,17 @@ public class ContainersTest {
 	@Test 
 	public void testContSingleton(){
 		Containers<Integer, String> cont2 = HW0Runner.getContainers();
+		Map<String, Integer> myMap = cont2.initEmptyMap();
+		cont2.storeMap(myMap);
+
+		for (int i =0; i < intArray.length; i++){
+			cont2.addToMap(strArray[i], intClassArray[i], true);
+		}
+
 		assertTrue(cont == cont2);
 		assertTrue("Map correct", intClassArray[0] == cont2.getValueFromMap(strArray[0]));
-		
-		
+		assertTrue("Map correct", intClassArray[0] == cont.getValueFromMap(strArray[0]));
+
+
 	}
 }
