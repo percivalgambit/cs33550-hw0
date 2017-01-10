@@ -12,19 +12,10 @@ import java.util.Set;
  */
 public class HW0Runner {
 	private static class SingletonContainersImpl implements Containers<Integer, String> {
-		private static SingletonContainersImpl instance = null;
-
 		private Map<String, Integer> map = null;
 
 		// Prevents other classes from instantiating this one.
 		private SingletonContainersImpl() {}
-
-		public static SingletonContainersImpl getInstance() {
-			if (instance == null) {
-				instance = new SingletonContainersImpl();
-			}
-			return instance;
-		}
 
 		public Set<Integer> initSet(Integer[] tArray) {
 			return new HashSet<Integer>(Arrays.asList(tArray));
@@ -43,6 +34,7 @@ public class HW0Runner {
 		}
 
 		public boolean addToMap(String key, Integer value, boolean overwriteExistingKey) {
+			assert (map != null) : "Internal map was not initialized with storeMap";
 			if (overwriteExistingKey || !map.containsKey(key)) {
 				map.put(key, value);
 				return true;
@@ -52,10 +44,12 @@ public class HW0Runner {
 
 		// If the key is not present in the map, this function will return null.
 		public Integer getValueFromMap(String key) {
+			assert (map != null) : "Internal map was not initialized with storeMap";
 			return map.get(key);
 		}
 
 		public Integer getValueFromMap(String key, Integer defaultValue) {
+			assert (map != null) : "Internal map was not initialized with storeMap";
 			// Since some Map implementations can contain null keys, we cannot use the
 			// get() function, since it returns null if a key is not present in the map
 			// or if the key is present but has a null value. Instead we need to
@@ -64,10 +58,15 @@ public class HW0Runner {
 		}
 	}
 
+	private static SingletonContainersImpl instance = null;
+
 	// This class is a factory for a singleton containers class.
 	// https://www.tutorialspoint.com/java/java_using_singleton.htm
 	public static Containers<Integer, String> getContainers() {
-		return SingletonContainersImpl.getInstance();
+		if (instance == null) {
+			instance = new SingletonContainersImpl();
+		}
+		return instance;
 	}
 
 	public static void main(String[] args) {}
